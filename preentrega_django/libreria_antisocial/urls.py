@@ -1,14 +1,11 @@
 from django.urls import path, include
 
-from .views import guitarra_view
-from .views import bajo_view
-from .views import bateria_view
+from .views import *
 
-from . import views 
 
 urlpatterns = [
-    path('guitarra/', guitarra_view, name='guitarra'),
-    path('bajo/', bajo_view, name = 'bajo' ),
-    path('bateria/',bateria_view, name = 'bateria'),
-    path( " ", include( "libreria_antisocial.urls"))
-]  
+    path('guitarra/', guitarra_form_view, name='crear-guitarra'),
+    path('bajo/', bajo_form_view, name='crear-bajo'),
+    path('bateria/', bateria_form_view, name='crear-bateria'),
+    path('busqueda/', search_view, name='crear-busqueda' )
+]

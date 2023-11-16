@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="{% url "crear-guitarra" %}" method="post">
+<form action="{% url "crear-busqueda" %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
-<input type="submit" value="Crear Guitarra">
+<input type="submit" value="Crear Busqueda">
 </form>
+
 <h1>Resultados</h1>
   <ul>
     {% for item in results %}
