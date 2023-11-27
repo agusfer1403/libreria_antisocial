@@ -1,0 +1,20 @@
+<!-- templates/listar_guitarras.html -->
+<h1>Listar Guitarras</h1>
+
+{% if guitarras %}
+    <ul>
+    {% for guitarra in guitarras %}
+        <li>
+            {{ guitarra.nombre }} - {{ guitarra.tipo }} - {{ guitarra.color }}
+
+            <a href="{% url 'editar_guitarra' pk=guitarra.pk %}">Editar</a>
+
+            <a href="{% url 'eliminar_guitarra' pk=guitarra.pk %}">Eliminar</a>
+
+            <a href="{%url 'detalle_guitarra' pk=guitarra.pk %}">Detalles</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay guitarras disponibles.</p>
+{% endif %}

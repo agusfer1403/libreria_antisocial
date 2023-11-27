@@ -1,0 +1,27 @@
+<!-- templates/editar_guitarra_electrica.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Guitarra Eléctrica</title>
+</head>
+<body>
+    <h1>Editar Guitarra Eléctrica</h1>
+
+    <form method="post" action="{% url 'editar_guitarra_electrica' editar_guitarra_electrica.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <a href="{% url 'listar_guitarras_electricas' %}">Volver a la lista de guitarras eléctricas</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+<h1>Listar Baterias</h1>
+
+{% if bateria %}
+    <ul>
+    {% for bateria in bateria %}
+        <li>
+            {{ bateria.nombre }} - {{ bateria.tipo }} - {{ bateria.color }}
+
+            <a href="{% url 'editar_bateria' pk=bajo.pk %}">Editar</a>
+
+            <a href="{% url 'eliminar_bateria' pk=bajo.pk %}">Eliminar</a>
+            
+            <a href="{%url 'detalle_bateria' pk=bajo.pk %}">Detalles</a>  
+
+
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay baterias disponibles.</p>
+{% endif %}

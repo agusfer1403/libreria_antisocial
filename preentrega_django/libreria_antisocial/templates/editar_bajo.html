@@ -1,0 +1,28 @@
+<!-- templates/editar_bajo.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Bajo</title>
+</head>
+<body>
+    <h1>Editar Bajo</h1>
+
+    <form method="post" action="{% url 'editar_bajo' editar_bajo.id %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }} {{ field }}
+            </div>
+           
+        {% endfor %}
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <a href="{% url 'listar_bajos' %}">Volver a la lista de bajos</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- templates/eliminar_guitarra.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Guitarra</title>
+</head>
+<body>
+    <h1>Eliminar Guitarra</h1>
+
+    <p>¿Estás seguro de que deseas eliminar la guitarra "{{ eliminar_guitarra.nombre }}"?</p>
+
+    <form method="post" action="{% url 'eliminar_guitarra' eliminar_guitarra.id %}">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+    </form>
+
+    <a href="{% url 'listar_guitarras' %}">Volver a la lista de guitarras</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- templates/listar_bajos.html -->
+<h1>Listar Bajos</h1>
+
+{% if bajo %}
+    <ul>
+    {% for bajo in bajo %}
+        <li>
+            {{ bajo.nombre }} - {{ bajo.tipo }} - {{ bajo.color }}
+
+            <a href="{% url 'editar_bajo' pk=bajo.pk %}">Editar</a>
+
+            <a href="{% url 'eliminar_bajo' pk=bajo.pk %}">Eliminar</a>
+            
+            <a href="{%url 'detalle_guitarra' pk=bajo.pk %}">Detalles</a>
+
+
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay bajos disponibles.</p>
+{% endif %}

@@ -1,0 +1,20 @@
+<!-- templates/listar_guitarras_electricas.html -->
+<h1>Listar Guitarras Electricas</h1>
+
+{% if guitarras_electricas %}
+    <ul>
+    {% for guitarra in guitarras_electricas %}
+        <li>
+            {{ guitarra.nombre }} - {{ guitarra.tipo }} - {{ guitarra.color }}
+
+            <a href="{% url 'editar_guitarra_electrica' pk=guitarra.pk %}">Editar</a>
+
+            <a href="{% url 'eliminar_guitarra_electrica' pk=guitarra.pk %}">Eliminar</a>
+
+            <a href="{% url 'detalle_guitarra_electrica' pk=guitarra.pk %}">Detalle</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay guitarras eléctricas disponibles.</p>
+{% endif %}

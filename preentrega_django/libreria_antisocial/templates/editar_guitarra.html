@@ -1,0 +1,27 @@
+<!-- templates/editar_guitarra.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Guitarra</title>
+</head>
+<body>
+    <h1>Editar Guitarra</h1>
+
+    <form method="post" action="{% url 'editar_guitarra' pk=guitarra.pk %}">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }} {{ field }}
+            </div>
+            <!-- Puedes personalizar el formato según tus preferencias -->
+        {% endfor %}
+
+        <button type="submit">Guardar Cambios</button>  
+    </form>
+</body>
+</html>
