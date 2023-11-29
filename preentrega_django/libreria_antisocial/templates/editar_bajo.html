@@ -10,7 +10,8 @@
 <body>
     <h1>Editar Bajo</h1>
 
-    <form method="post" action="{% url 'editar_bajo' editar_bajo.id %}">
+    <form method="post" action="{% url 'editar_bajo' bajo.id %}">
+
         {% csrf_token %}
 
         {% for field in form %}

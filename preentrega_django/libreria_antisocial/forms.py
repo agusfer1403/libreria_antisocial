@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import GuitarraElectrica, Bateria, Bajo, Guitarra
 
 class GuitarraForm(forms.Form):
     marca = forms.CharField(max_length=100)

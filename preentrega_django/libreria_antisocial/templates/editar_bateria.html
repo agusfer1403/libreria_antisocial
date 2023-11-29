@@ -1,5 +1,4 @@
 <!-- templates/editar_bateria.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,8 @@
 <body>
     <h1>Editar Batería</h1>
 
-    <form method="post" action="{% url 'editar_bateria' editar_bateria.id %}">
+    <form method="post" action="{% url 'editar_bateria' bateria.id %}">
+
         {% csrf_token %}
 
         {% for field in form %}
@@ -26,3 +26,4 @@
     <a href="{% url 'listar_baterias' %}">Volver a la lista de baterías</a>
 </body>
 </html>
+

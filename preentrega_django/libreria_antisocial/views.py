@@ -3,7 +3,6 @@ from .forms import GuitarraForm, BajoForm, BateriaForm, GuitarraElectricaForm, S
 from .models import Guitarra, Bajo, Bateria, GuitarraElectrica
 
 
-
 def guitarra_form_view(request):
     if request.method == 'POST':
         form = GuitarraForm(request.POST)
@@ -35,6 +34,7 @@ def guitarra_electrica_form_view(request):
     else:
         form = GuitarraElectricaForm()
     return render(request, 'crear-guitarraelectrica.html', {'form': form})
+
 
 def bajo_form_view(request):
     if request.method == 'POST':
@@ -132,6 +132,7 @@ def agregar_bajo(request):
     return render(request, 'agregar_bajo.html', {'form': form})
 
 
+
 def editar_bajo(request, pk):
     bajo = get_object_or_404(Bajo, pk=pk)
     if request.method == 'POST':
@@ -142,6 +143,7 @@ def editar_bajo(request, pk):
     else:
         form = BajoForm(instance=bajo)
     return render(request, 'editar_bajo.html', {'form': form, 'bajo': bajo})
+
 
 def eliminar_bajo(request, pk):
     bajo = get_object_or_404(Bajo, pk=pk)
@@ -164,14 +166,28 @@ def agregar_bateria(request):
 
 def editar_bateria(request, pk):
     bateria = get_object_or_404(Bateria, pk=pk)
+
     if request.method == 'POST':
-        form = BateriaForm(request.POST, instance=bateria)
+        form = BateriaForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Actualizar los valores de la instancia de Bateria
+            bateria.marca = form.cleaned_data['marca']
+            bateria.modelo = form.cleaned_data['modelo']
+            bateria.color = form.cleaned_data['color']
+            bateria.numero_piezas = form.cleaned_data['numero_piezas']
+            bateria.save()
             return redirect('listar_baterias')
     else:
-        form = BateriaForm(instance=bateria)
-    return render(request, 'instrumentos/editar_bateria.html', {'form': form, 'bateria': bateria})
+
+        form = BateriaForm(initial={
+            'marca': bateria.marca,
+            'modelo': bateria.modelo,
+            'color': bateria.color,
+            'numero_piezas': bateria.numero_piezas,
+        })
+
+    return render(request, 'editar_bateria.html', {'form': form, 'bateria': bateria})
+
 
 def eliminar_bateria(request, pk):
     bateria = get_object_or_404(Bateria, pk=pk)
@@ -181,7 +197,7 @@ def eliminar_bateria(request, pk):
 
 def listar_guitarras_electricas(request):
     guitarras_electricas = GuitarraElectrica.objects.all()
-    return render(request, 'instrumentos/listar_guitarras_electricas.html', {'guitarras_electricas': guitarras_electricas})
+    return render(request, 'listar_guitarras_electricas.html', {'guitarras_electricas': guitarras_electricas})
 
 
 def agregar_guitarra_electrica(request):
@@ -192,7 +208,7 @@ def agregar_guitarra_electrica(request):
             return redirect('listar_guitarras_electricas')
     else:
         form = GuitarraElectricaForm()
-    return render(request, 'instrumentos/agregar_guitarra_electrica.html', {'form': form})
+    return render(request, 'agregar_guitarra_electrica.html', {'form': form})
 
 def editar_guitarra_electrica(request, pk):
     guitarra_electrica = get_object_or_404(GuitarraElectrica, pk=pk)
@@ -203,7 +219,7 @@ def editar_guitarra_electrica(request, pk):
             return redirect('listar_guitarras_electricas')
     else:
         form = GuitarraElectricaForm(instance=guitarra_electrica)
-    return render(request, 'instrumentos/editar_guitarra_electrica.html', {'form': form, 'guitarra_electrica': guitarra_electrica})
+    return render(request, 'editar_guitarra_electrica.html', {'form': form, 'guitarra_electrica': guitarra_electrica})
 
 def eliminar_guitarra_electrica(request, pk):
     guitarra_electrica = get_object_or_404(GuitarraElectrica, pk=pk)
@@ -223,6 +239,6 @@ def detalle_bateria(request, pk):
     bateria = get_object_or_404(Bateria, pk=pk)
     return render(request, 'detalle_bateria.html', {'bateria': bateria})
 
-def detalle_guitarra_electrica(request, pk):    
-    GuitarraElectrica = get_object_or_404(GuitarraElectrica, pk=pk)
-    return render(request, 'detalle_guitarra_electrica.html', {'guitarraelectrica': GuitarraElectrica})
+def detalle_guitarra_electrica(request, pk):
+    guitarra_electrica = get_object_or_404(GuitarraElectrica, pk=pk)
+    return render(request, 'detalle_guitarra_electrica.html', {'guitarra_electrica': guitarra_electrica})
