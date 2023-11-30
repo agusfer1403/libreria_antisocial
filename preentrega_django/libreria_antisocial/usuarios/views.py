@@ -1,0 +1,21 @@
+from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.views import LoginView, LogoutView
+
+from .models import Article
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+class ArticleListView(ListView):
+    model = Article
+    template_name = 'article_list.html'
+    context_object_name = 'articles'
+
+class ArticleDetailView(DetailView):
+    model = Article
+    template_name = 'article_detail.html'
+    context_object_name = 'article'
+
+class AboutView(TemplateView):
+    template_name = 'about.html'
+    
